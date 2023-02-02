@@ -1,5 +1,7 @@
 # Unity Dialogue System
 
+This is a fork of [this repository](https://github.com/Wafflus/unity-dialogue-system) by [Wafflus](https://github.com/Wafflus)
+
 A Node-Based Dialogue System made for Unity using the Experimental GraphView API.
 
 ![Graph Example](https://imgur.com/LlLZkmc.png)
