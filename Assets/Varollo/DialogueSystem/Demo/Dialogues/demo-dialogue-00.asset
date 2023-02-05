@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0202a3095b7477a4091d56344f0af6b3, type: 3}
+  m_Name: demo-dialogue-00
+  m_EditorClassIdentifier: 
+  <FileName>k__BackingField: demo-dialogue-00
+  <Groups>k__BackingField:
+  - <ID>k__BackingField: 57be6db2-89b7-40b9-9f40-4768f3d58836
+    <Name>k__BackingField: DialogueGroup
+    <Position>k__BackingField: {x: 216, y: 59}
+  <Nodes>k__BackingField:
+  - <ID>k__BackingField: 77fe2415-339a-4869-b3c8-6e0cabd05361
+    <Name>k__BackingField: Speaker
+    <Text>k__BackingField: Dialogue text.
+    <Choices>k__BackingField:
+    - <Text>k__BackingField: Next
+      <NodeID>k__BackingField: 
+    <GroupID>k__BackingField: 
+    <DialogueType>k__BackingField: 1
+    <Position>k__BackingField: {x: 646, y: 238}
