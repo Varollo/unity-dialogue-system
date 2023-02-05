@@ -107,6 +107,26 @@
 	color: var(--ds-colors-window-yellow);
 }
 
+.ds-node__button-delete
+{
+	background-color: #442233;
+	border-color: #000000;
+	color: #FF5588;
+	margin: var(--ds-metrics-window-pixels-4);
+	max-height: var(--ds-metrics-window-pixels-25);
+}
+
+.ds-node__button-delete:hover
+{
+	background-color: #663344;
+}
+
+.ds-node__button-delete:active
+{
+	background-color: #552233;
+	color: #DD3355;
+}
+
 /* ELEMENTS */
 
 TextField
