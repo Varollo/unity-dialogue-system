@@ -6,6 +6,7 @@ namespace DS.Elements
 {
     using Data.Save;
     using Enumerations;
+    using System;
     using Utilities;
     using Windows;
 
@@ -14,21 +15,19 @@ namespace DS.Elements
         public override void Initialize(string nodeName, DSGraphView dsGraphView, Vector2 position)
         {
             base.Initialize(nodeName, dsGraphView, position);
-
             DialogueType = DSDialogueType.MultipleChoice;
-            Choices = new() { new() { Text = "New Choice" } };
+
+            DSChoiceSaveData choice = new(Guid.NewGuid().ToString()) { Text = "Next" };
+            Choices = new() { { choice.ChoiceID, choice } };
         }
 
         protected override void DrawOutputPorts()
         {
             Button addChoiceButton = DSElementUtility.CreateButton("Add Choice", () =>
             {
-                DSChoiceSaveData choiceData = new DSChoiceSaveData()
-                {
-                    Text = "New Choice"
-                };
+                DSChoiceSaveData choiceData = new(Guid.NewGuid().ToString()) { Text = "New Choice" };
 
-                Choices.Add(choiceData);
+                Choices.Add(choiceData.ChoiceID, choiceData);
                 outputContainer.Add(CreateChoicePort(Choices.Count - 1, choiceData));
             });
 
@@ -62,7 +61,7 @@ namespace DS.Elements
                     GraphView.DeleteElements(choicePort.connections);
                 }
 
-                Choices.Remove(choiceData);
+                Choices.Remove(choiceData.ChoiceID);
 
                 GraphView.RemoveElement(choicePort);
             });

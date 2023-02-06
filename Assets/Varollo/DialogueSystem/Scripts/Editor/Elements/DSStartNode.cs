@@ -5,13 +5,13 @@ using UnityEngine.UIElements;
 
 namespace DS.Elements
 {
-    internal class DSStartNode : DSSingleChoiceNode
+    internal class DSStartNode : DSNode
     {
         public override void Initialize(string nodeName, DSGraphView dsGraphView, Vector2 position)
         {
-            base.Initialize(nodeName, dsGraphView, position);
-            
+            base.Initialize(nodeName, dsGraphView, position);            
             DialogueType = Enumerations.DSDialogueType.Start;
+            SpeakerID = DialogueType.ToString();
         }
 
         protected override void DrawNodeTitle()

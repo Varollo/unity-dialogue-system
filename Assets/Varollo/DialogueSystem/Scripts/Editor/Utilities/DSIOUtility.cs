@@ -27,13 +27,11 @@ namespace DS.Utilities
                 switch (graphElement)
                 {
                     case DSNode node:
-                        DSChoiceSaveData[] choices = new DSChoiceSaveData[node.Choices.Count];
-                        node.Choices.CopyTo(choices);
                         nodes.Add(new()
                         {
                             ID = node.DialogueID,
                             Name = node.SpeakerID,
-                            Choices = choices != null ? new(choices) : new(),
+                            Choices = node.Choices.Values.ToArray(),
                             Text = node.Text,
                             GroupID = node.Group?.ID,
                             DialogueType = node.DialogueType,
@@ -81,19 +79,23 @@ namespace DS.Utilities
 
             foreach (DSNodeSaveData nodeData in (IEnumerable<DSNodeSaveData>)graphData)
             {
-                DSChoiceSaveData[] choices = new DSChoiceSaveData[nodeData.Choices.Count];
-                nodeData.Choices.CopyTo(choices);
+                DSChoiceSaveData[] choices = new DSChoiceSaveData[nodeData.Choices.Length];
+                nodeData.Choices.CopyTo(choices, 0);
 
                 DSNode node = graph.CreateNode(nodeData.DialogueType, nodeData.Position, nodeData.Name, false);
 
                 node.DialogueID = nodeData.ID;
-                node.Choices = choices != null ? new(choices) : new();
+                node.Choices = choices == null ? new() : choices.ToDictionary(choice => choice.ChoiceID);
                 node.Text = nodeData.Text;
 
                 nodes.Add(node.DialogueID, node);
                 node.Draw();
 
-                graph.AddElement(node);
+                if (nodeData.DialogueType is Enumerations.DSDialogueType.Start)
+                    graph.SetStartNode(node);
+                
+                else
+                    graph.AddElement(node);
 
                 if (!string.IsNullOrEmpty(nodeData.GroupID))
                 {
