@@ -9,7 +9,6 @@ namespace DS.Elements
     using Data.Save;
     using Enumerations;
     using System.Linq;
-    using UnityEditor.TestTools.TestRunner.Api;
     using Utilities;
     using Windows;
 
@@ -79,20 +78,19 @@ namespace DS.Elements
 
         protected virtual void DrawNodeTitle()
         {
-            TextField dialogueNameTextField = DSElementUtility.CreateTextField(SpeakerID, null, callback =>
+            TextField speakerTextField = DSElementUtility.CreateTextField(SpeakerID, null, callback =>
             {
                 TextField target = (TextField)callback.target;
-
-                target.value = callback.newValue;
+                SpeakerID = target.value = callback.newValue;
             });
 
-            dialogueNameTextField.AddClasses(
+            speakerTextField.AddClasses(
                 "ds-node__text-field",
                 "ds-node__text-field__hidden",
                 "ds-node__filename-text-field"
             );
 
-            titleContainer.Insert(0, dialogueNameTextField);
+            titleContainer.Insert(0, speakerTextField);
         }
 
         protected virtual void DrawInputPorts()
