@@ -248,7 +248,10 @@ namespace DS.Windows
                         DSNode prevNode = (DSNode) edge.output.node;
 
                         string choiceID = ((DSChoiceSaveData)edge.output.userData).ChoiceID;
-                        prevNode.Choices[choiceID].SetNextNode(nextNode.DialogueID);
+                        DSChoiceSaveData choice = prevNode.Choices[choiceID];
+
+                        choice.NodeID = nextNode.DialogueID;
+                        prevNode.Choices[choiceID] = choice;
                     }
                 }
 

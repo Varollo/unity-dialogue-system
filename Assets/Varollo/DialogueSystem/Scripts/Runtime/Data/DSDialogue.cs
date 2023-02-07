@@ -1,47 +1,45 @@
-using System.Collections.Generic;
-using System.Collections;
-using UnityEngine;
-using DS.Data.Save;
-
-#if UNITY_EDITOR
-using UnityEditor;
-#endif
+﻿using DS.Data.Save;
+using System.Linq;
 
 namespace DS.Data
 {
-    public class DSDialogue : ScriptableObject, IEnumerable<DSGroupSaveData>, IEnumerable<DSNodeSaveData>
+    public class DSDialogue
     {
-        [field: SerializeField] internal string FileName { get; private set; }
-        [field: SerializeField] internal List<DSGroupSaveData> Groups { get; private set; }
-        [field: SerializeField] internal List<DSNodeSaveData> Nodes { get; private set; }
+        private readonly DSDialogueGraph _graphObject;
+        private readonly DSNodeSaveData _saveData;
 
-        IEnumerator<DSGroupSaveData> IEnumerable<DSGroupSaveData>.GetEnumerator() => Groups?.GetEnumerator();
-        IEnumerator<DSNodeSaveData> IEnumerable<DSNodeSaveData>.GetEnumerator() => Nodes?.GetEnumerator();
-        IEnumerator IEnumerable.GetEnumerator() => Groups?.GetEnumerator();
-
-#if UNITY_EDITOR
-        public static DSDialogue GetOrCreateGraph(string relativePath, IEnumerable<DSGroupSaveData> groupData = null, IEnumerable<DSNodeSaveData> nodeData = null)
+        internal DSDialogue(DSDialogueGraph graphObject, DSNodeSaveData saveData)
         {
-            relativePath = relativePath.Remove(0, relativePath.IndexOf("Assets"));
+            _graphObject = graphObject;
+            _saveData = saveData;
 
-            DSDialogue asset = AssetDatabase.LoadAssetAtPath<DSDialogue>(relativePath);
+            Speaker = _saveData.Name;
+            Text = _saveData.Text;
+            Group = _graphObject.GetGroup(_saveData.GroupID);
+            Choices = _saveData.Choices.Select(choice => new DSChoice(graphObject, choice)).ToArray();
+        }
 
-            if (asset == null)
+        public string Speaker { get; set; }
+        public string Text { get; set; }
+        public string Group { get; set; }
+        public DSChoice[] Choices { get; set; }
+
+        public struct DSChoice
+        {
+            private readonly DSDialogueGraph _graphObject;
+            private readonly DSChoiceSaveData _saveData;
+
+            public DSChoice(DSDialogueGraph graphObject, DSChoiceSaveData saveData) : this()
             {
-                asset = CreateInstance<DSDialogue>();
-                AssetDatabase.CreateAsset(asset, relativePath);
+                _graphObject = graphObject;
+                _saveData = saveData;
+
+                Text = _saveData.Text;
+                Next = string.IsNullOrEmpty(_saveData.NodeID) ? null : _graphObject.GetDialogue(saveData.NodeID);
             }
 
-            asset.FileName = asset.name;
-            asset.Groups = groupData != null ? new(groupData) : new();
-            asset.Nodes = nodeData != null ? new(nodeData) : new();
-
-            EditorUtility.SetDirty(asset);
-            AssetDatabase.SaveAssets();
-            AssetDatabase.Refresh();
-
-            return asset;
+            public string Text { get; set; }
+            public DSDialogue Next { get; set; }
         }
-#endif
     }
 }

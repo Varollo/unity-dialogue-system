@@ -14,20 +14,20 @@ namespace DS.Utilities
 {
     public static class DSIOUtility
     {
-        public static DSDialogue Save(DSGraphView graph, string fileName)
+        public static DSDialogueGraph Save(DSGraphView graph, string fileName)
         {
             if (!OpenSavePanel(fileName, out string path))
                 return null;
 
             List<DSNodeSaveData> nodes = new();
             List<DSGroupSaveData> groups = new();
-                        
+
             graph.graphElements.ForEach(graphElement =>
             {
                 switch (graphElement)
                 {
                     case DSNode node:
-                        nodes.Add(new()
+                        DSNodeSaveData data = new()
                         {
                             ID = node.DialogueID,
                             Name = node.SpeakerID,
@@ -36,8 +36,15 @@ namespace DS.Utilities
                             GroupID = node.Group?.ID,
                             DialogueType = node.DialogueType,
                             Position = node.GetPosition().position
-                        });
+                        };
+
+                        if (node.Equals(graph.StartNode))
+                            nodes.Insert(0, data);
+                        else
+                            nodes.Add(data);
+
                         break;
+
                     case DSGroup group:
                         groups.Add(new()
                         {
@@ -49,7 +56,7 @@ namespace DS.Utilities
                 }
             });
 
-            return DSDialogue.GetOrCreateGraph(path, groups, nodes);
+            return DSDialogueGraph.GetOrCreateGraph(path, groups, nodes);
         }
 
         public static void Load(DSGraphView graph)
@@ -57,13 +64,13 @@ namespace DS.Utilities
             if (!OpenLoadPanel(out string path))
                 return;
 
-            DSDialogue graphData = LoadAsset<DSDialogue>(path);
+            DSDialogueGraph graphData = LoadAsset<DSDialogueGraph>(path);
 
             if (graphData != null)
                 Load(graph, graphData);
         }
 
-        public static void Load(DSGraphView graph, DSDialogue graphData)
+        public static void Load(DSGraphView graph, DSDialogueGraph graphData)
         {
             DSEditorWindow.UpdateFileName(graphData.name);
 

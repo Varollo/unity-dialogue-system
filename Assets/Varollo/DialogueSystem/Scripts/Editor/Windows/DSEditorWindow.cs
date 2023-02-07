@@ -11,7 +11,7 @@ namespace DS.Windows
 
     public class DSEditorWindow : EditorWindow
     {
-        private static DSDialogue loadedGraph;
+        private static DSDialogueGraph loadedGraph;
 
         private DSGraphView graphView;
 
@@ -36,7 +36,7 @@ namespace DS.Windows
             return window;
         }
 
-        public static void Open(DSDialogue graphData)
+        public static void Open(DSDialogueGraph graphData)
         {
             DSIOUtility.Load(Open(true).graphView, loadedGraph = graphData);
         }
@@ -100,7 +100,7 @@ namespace DS.Windows
                 return;
             }
 
-            DSDialogue save = DSIOUtility.Save(graphView, fileNameTextField.value);
+            DSDialogueGraph save = DSIOUtility.Save(graphView, fileNameTextField.value);
             loadedGraph = save ? save : loadedGraph;
         }
 
