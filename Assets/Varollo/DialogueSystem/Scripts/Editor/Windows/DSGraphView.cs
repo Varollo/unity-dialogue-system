@@ -37,7 +37,11 @@ namespace DS.Windows
 
             AddStyles();
             AddMiniMapStyles();
+
+            SetStartNode(CreateNode(DSDialogueType.Start, Vector2.zero));
         }
+
+        internal DSNode StartNode { get; private set; }
 
         public override List<Port> GetCompatiblePorts(Port startPort, NodeAdapter nodeAdapter)
         {
@@ -152,15 +156,11 @@ namespace DS.Windows
             {
                 foreach (GraphElement element in elements)
                 {
-                    if (!(element is DSNode))
+                    if (element is DSNode node && !node.Equals(StartNode))
                     {
-                        continue;
+                        DSGroup dsGroup = (DSGroup)group;
+                        AddGroupedNode(node, dsGroup);
                     }
-
-                    DSGroup dsGroup = (DSGroup)group;
-                    DSNode node = (DSNode)element;
-
-                    AddGroupedNode(node, dsGroup);
                 }
             };
         }
@@ -206,8 +206,12 @@ namespace DS.Windows
                 for (int i = nodesToDelete.Count - 1; i >= 0; i--)
                 {
                     DSNode nodeToDelete = nodesToDelete[i];
-                    nodeToDelete.DisconnectAllPorts();
-                    RemoveElement(nodeToDelete);
+
+                    if(!nodeToDelete.Equals(StartNode))
+                    {
+                        nodeToDelete.DisconnectAllPorts();
+                        RemoveElement(nodeToDelete);
+                    }
                 }
             };
         }
@@ -241,10 +245,13 @@ namespace DS.Windows
                     foreach (Edge edge in changes.edgesToCreate)
                     {
                         DSNode nextNode = (DSNode) edge.input.node;
+                        DSNode prevNode = (DSNode) edge.output.node;
 
-                        DSChoiceSaveData choiceData = (DSChoiceSaveData) edge.output.userData;
+                        string choiceID = ((DSChoiceSaveData)edge.output.userData).ChoiceID;
+                        DSChoiceSaveData choice = prevNode.Choices[choiceID];
 
-                        choiceData.NodeID = nextNode.DialogueID;
+                        choice.NodeID = nextNode.DialogueID;
+                        prevNode.Choices[choiceID] = choice;
                     }
                 }
 
@@ -342,12 +349,24 @@ namespace DS.Windows
 
         public void ClearGraph()
         {
-            graphElements.ForEach(graphElement => RemoveElement(graphElement));
+            graphElements.ForEach(graphElement => 
+            {
+                if (graphElement is not DSStartNode)
+                    RemoveElement(graphElement); 
+            });
         }
 
         public void ToggleMiniMap()
         {
             miniMap.visible = !miniMap.visible;
+        }
+
+        public void SetStartNode(DSNode node)
+        {
+            if(StartNode != null)
+                RemoveElement(StartNode);
+
+            AddElement(StartNode = node);
         }
     }
 }

@@ -8,6 +8,7 @@ namespace DS.Elements
 {
     using Data.Save;
     using Enumerations;
+    using System.Linq;
     using Utilities;
     using Windows;
 
@@ -16,7 +17,7 @@ namespace DS.Elements
         protected DSGraphView GraphView { get; set; }
         public string DialogueID { get; set; }
         public string SpeakerID { get; set; } = "Speaker";
-        public List<DSChoiceSaveData> Choices { get; set; } = new() { new() { Text = "Next" } };
+        public Dictionary<string, DSChoiceSaveData> Choices { get; set; }
         public string Text { get; set; } = "Dialogue text.";
         public DSDialogueType DialogueType { get; set; }
         public DSGroup Group { get; set; }
@@ -34,6 +35,9 @@ namespace DS.Elements
             DialogueID = Guid.NewGuid().ToString();
             SpeakerID = speakerID;
             GraphView = dsGraphView;
+
+            DSChoiceSaveData defaultChoice = new(Guid.NewGuid().ToString()) { Text = "Next" };
+            Choices = new() { { defaultChoice.ChoiceID, defaultChoice } };
 
             mainContainer.AddToClassList("ds-node__main-container");
             extensionContainer.AddToClassList("ds-node__extension-container");
@@ -74,20 +78,19 @@ namespace DS.Elements
 
         protected virtual void DrawNodeTitle()
         {
-            TextField dialogueNameTextField = DSElementUtility.CreateTextField(SpeakerID, null, callback =>
+            TextField speakerTextField = DSElementUtility.CreateTextField(SpeakerID, null, callback =>
             {
                 TextField target = (TextField)callback.target;
-
-                target.value = callback.newValue;
+                SpeakerID = target.value = callback.newValue;
             });
 
-            dialogueNameTextField.AddClasses(
+            speakerTextField.AddClasses(
                 "ds-node__text-field",
                 "ds-node__text-field__hidden",
                 "ds-node__filename-text-field"
             );
 
-            titleContainer.Insert(0, dialogueNameTextField);
+            titleContainer.Insert(0, speakerTextField);
         }
 
         protected virtual void DrawInputPorts()
@@ -99,9 +102,10 @@ namespace DS.Elements
 
         protected virtual void DrawOutputPorts()
         {
-            for (int i = 0; i < Choices.Count; i++)
+            DSChoiceSaveData[] choiceArray = Choices.Values.ToArray();
+            for (int i = 0; i < choiceArray.Length; i++)
             {
-                Port choicePort = CreateChoicePort(i, Choices[i]);
+                Port choicePort = CreateChoicePort(i, choiceArray[i]);
                 outputContainer.Add(choicePort);
             }
         }
@@ -135,12 +139,9 @@ namespace DS.Elements
 
             choicePort.userData = userData;
 
-            DSChoiceSaveData choiceData = (DSChoiceSaveData) userData;
-            
-            TextField choiceTextField = DSElementUtility.CreateTextField(choiceData.Text, null, callback =>
-            {
-                choiceData.Text = callback.newValue;
-            });
+            DSChoiceSaveData choiceData = (DSChoiceSaveData)userData;
+
+            TextField choiceTextField = DSElementUtility.CreateTextField(choiceData.Text, null, callback => OnChoiceTextChanges(choiceData.ChoiceID, callback.newValue));
 
             choiceTextField.AddClasses(
                 "ds-node__text-field",
@@ -151,6 +152,13 @@ namespace DS.Elements
             choicePort.Insert(0, choiceTextField);
 
             return choicePort;
+        }
+
+        protected virtual void OnChoiceTextChanges(string choiceID, string newText)
+        {
+            DSChoiceSaveData choice = Choices[choiceID];
+            choice.Text = newText;
+            Choices[choiceID] = choice;
         }
     }
 }

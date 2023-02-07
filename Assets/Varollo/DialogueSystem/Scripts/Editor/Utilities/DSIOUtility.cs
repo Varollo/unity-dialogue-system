@@ -14,32 +14,37 @@ namespace DS.Utilities
 {
     public static class DSIOUtility
     {
-        public static DSDialogue Save(DSGraphView graph, string fileName)
+        public static DSDialogueGraph Save(DSGraphView graph, string fileName)
         {
             if (!OpenSavePanel(fileName, out string path))
                 return null;
 
             List<DSNodeSaveData> nodes = new();
             List<DSGroupSaveData> groups = new();
-                        
+
             graph.graphElements.ForEach(graphElement =>
             {
                 switch (graphElement)
                 {
                     case DSNode node:
-                        DSChoiceSaveData[] choices = new DSChoiceSaveData[node.Choices.Count];
-                        node.Choices.CopyTo(choices);
-                        nodes.Add(new()
+                        DSNodeSaveData data = new()
                         {
                             ID = node.DialogueID,
                             Name = node.SpeakerID,
-                            Choices = choices != null ? new(choices) : new(),
+                            Choices = node.Choices.Values.ToArray(),
                             Text = node.Text,
                             GroupID = node.Group?.ID,
                             DialogueType = node.DialogueType,
                             Position = node.GetPosition().position
-                        });
+                        };
+
+                        if (node.Equals(graph.StartNode))
+                            nodes.Insert(0, data);
+                        else
+                            nodes.Add(data);
+
                         break;
+
                     case DSGroup group:
                         groups.Add(new()
                         {
@@ -51,7 +56,7 @@ namespace DS.Utilities
                 }
             });
 
-            return DSDialogue.GetOrCreateGraph(path, groups, nodes);
+            return DSDialogueGraph.GetOrCreateGraph(path, groups, nodes);
         }
 
         public static void Load(DSGraphView graph)
@@ -59,13 +64,13 @@ namespace DS.Utilities
             if (!OpenLoadPanel(out string path))
                 return;
 
-            DSDialogue graphData = LoadAsset<DSDialogue>(path);
+            DSDialogueGraph graphData = LoadAsset<DSDialogueGraph>(path);
 
             if (graphData != null)
                 Load(graph, graphData);
         }
 
-        public static void Load(DSGraphView graph, DSDialogue graphData)
+        public static void Load(DSGraphView graph, DSDialogueGraph graphData)
         {
             DSEditorWindow.UpdateFileName(graphData.name);
 
@@ -81,19 +86,23 @@ namespace DS.Utilities
 
             foreach (DSNodeSaveData nodeData in (IEnumerable<DSNodeSaveData>)graphData)
             {
-                DSChoiceSaveData[] choices = new DSChoiceSaveData[nodeData.Choices.Count];
-                nodeData.Choices.CopyTo(choices);
+                DSChoiceSaveData[] choices = new DSChoiceSaveData[nodeData.Choices.Length];
+                nodeData.Choices.CopyTo(choices, 0);
 
                 DSNode node = graph.CreateNode(nodeData.DialogueType, nodeData.Position, nodeData.Name, false);
 
                 node.DialogueID = nodeData.ID;
-                node.Choices = choices != null ? new(choices) : new();
+                node.Choices = choices == null ? new() : choices.ToDictionary(choice => choice.ChoiceID);
                 node.Text = nodeData.Text;
 
                 nodes.Add(node.DialogueID, node);
                 node.Draw();
 
-                graph.AddElement(node);
+                if (nodeData.DialogueType is Enumerations.DSDialogueType.Start)
+                    graph.SetStartNode(node);
+                
+                else
+                    graph.AddElement(node);
 
                 if (!string.IsNullOrEmpty(nodeData.GroupID))
                 {

@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace DS.Inspectors
 {
-    [CustomEditor(typeof(DSDialogue))]
+    [CustomEditor(typeof(DSDialogueGraph))]
     internal class DSDialogueEditor : Editor
     {
         public override void OnInspectorGUI()
@@ -13,7 +13,7 @@ namespace DS.Inspectors
             base.OnInspectorGUI();
             if(GUILayout.Button("Open in Dialogue Graph Editor"))
             {
-                DSEditorWindow.Open(target as DSDialogue);
+                DSEditorWindow.Open(target as DSDialogueGraph);
             }
         }
     }
