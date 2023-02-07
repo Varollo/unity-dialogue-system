@@ -1,0 +1,221 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0ce4f9bde22415d448a5569bf5756cf3, type: 3}
+  m_Name: demo-dialogue
+  m_EditorClassIdentifier: 
+  <FileName>k__BackingField: demo-dialogue
+  <Groups>k__BackingField:
+  - <ID>k__BackingField: c23e4776-e66f-4914-ad8b-e77240e9bcce
+    <Name>k__BackingField: Introduction
+    <Position>k__BackingField: {x: 181, y: -29}
+  - <ID>k__BackingField: 83ed9a29-f897-4ea3-b380-140dcf0c9d9d
+    <Name>k__BackingField: Question 1
+    <Position>k__BackingField: {x: 1508, y: -68}
+  - <ID>k__BackingField: 8da711c1-9e19-4865-a26e-d5f1fddb2828
+    <Name>k__BackingField: Question 2
+    <Position>k__BackingField: {x: 3412, y: -101}
+  <Nodes>k__BackingField:
+  - <ID>k__BackingField: c8e0838b-877d-472e-bdb9-c79aaa8f94f0
+    <Name>k__BackingField: Start
+    <Text>k__BackingField: Dialogue text.
+    <Choices>k__BackingField:
+    - <ChoiceID>k__BackingField: 70f36691-31b1-410f-98e2-8658cef10605
+      <NodeID>k__BackingField: df21bf93-7463-4e49-8138-8af21140006d
+      <Text>k__BackingField: Next
+    <GroupID>k__BackingField: 
+    <DialogueType>k__BackingField: 0
+    <Position>k__BackingField: {x: 60, y: -8}
+  - <ID>k__BackingField: df21bf93-7463-4e49-8138-8af21140006d
+    <Name>k__BackingField: ???
+    <Text>k__BackingField: Wellcome everyone! To the DemoQuiz Show!
+    <Choices>k__BackingField:
+    - <ChoiceID>k__BackingField: 04f8b51a-d3ff-4237-b412-208664950c0c
+      <NodeID>k__BackingField: 57357308-71f4-4016-b795-faf8a6247aa2
+      <Text>k__BackingField: Next
+    <GroupID>k__BackingField: c23e4776-e66f-4914-ad8b-e77240e9bcce
+    <DialogueType>k__BackingField: 1
+    <Position>k__BackingField: {x: 206, y: 30}
+  - <ID>k__BackingField: 57357308-71f4-4016-b795-faf8a6247aa2
+    <Name>k__BackingField: Varollo
+    <Text>k__BackingField: 'I am your host, Varollo, and today we have a special
+      guest...
+
+      Are you ready to take a quiz on the Dialogue System?'
+    <Choices>k__BackingField:
+    - <ChoiceID>k__BackingField: b1676d02-f7e8-427b-b7f5-140e7ffe7d30
+      <NodeID>k__BackingField: 9415edda-f881-4306-86f1-d467bc4f8c25
+      <Text>k__BackingField: Yes!
+    <GroupID>k__BackingField: c23e4776-e66f-4914-ad8b-e77240e9bcce
+    <DialogueType>k__BackingField: 1
+    <Position>k__BackingField: {x: 578, y: 30}
+  - <ID>k__BackingField: 9415edda-f881-4306-86f1-d467bc4f8c25
+    <Name>k__BackingField: Varollo
+    <Text>k__BackingField: Well then, without further ado, onto our first question!
+    <Choices>k__BackingField:
+    - <ChoiceID>k__BackingField: 8c59da48-4074-40ba-94c5-671e0534a879
+      <NodeID>k__BackingField: bd0c74d9-5dd6-4475-9884-f04e65cb9614
+      <Text>k__BackingField: Next
+    <GroupID>k__BackingField: c23e4776-e66f-4914-ad8b-e77240e9bcce
+    <DialogueType>k__BackingField: 1
+    <Position>k__BackingField: {x: 1036, y: 30}
+  - <ID>k__BackingField: bdc7ac28-9c16-4240-a30b-ff15d1ac812e
+    <Name>k__BackingField: 
+    <Text>k__BackingField: '*DING!*'
+    <Choices>k__BackingField:
+    - <ChoiceID>k__BackingField: a5c174c6-b368-491f-bd51-688b275cb182
+      <NodeID>k__BackingField: 5c2ceff6-05a3-46c7-a1f1-0ae3c4b2d414
+      <Text>k__BackingField: Next
+    <GroupID>k__BackingField: 83ed9a29-f897-4ea3-b380-140dcf0c9d9d
+    <DialogueType>k__BackingField: 1
+    <Position>k__BackingField: {x: 2038, y: -9}
+  - <ID>k__BackingField: 418b3eea-b021-4f79-9ca6-94463d3e5647
+    <Name>k__BackingField: 
+    <Text>k__BackingField: '*BEEEEEEENG!*'
+    <Choices>k__BackingField:
+    - <ChoiceID>k__BackingField: d44b8de8-fcd7-4f0d-9ae7-fb6df9c387ab
+      <NodeID>k__BackingField: fd461f0a-2637-43eb-89c4-6cc6f344d094
+      <Text>k__BackingField: Next
+    <GroupID>k__BackingField: 83ed9a29-f897-4ea3-b380-140dcf0c9d9d
+    <DialogueType>k__BackingField: 1
+    <Position>k__BackingField: {x: 2038, y: 203}
+  - <ID>k__BackingField: 5c2ceff6-05a3-46c7-a1f1-0ae3c4b2d414
+    <Name>k__BackingField: Varollo
+    <Text>k__BackingField: 'That''s right! The orinal author of this asset is Wafflus,
+      while I, Varollo, merelly forked it from github!  '
+    <Choices>k__BackingField:
+    - <ChoiceID>k__BackingField: 1554fbb6-80e2-4271-bed3-0e45d8ff447c
+      <NodeID>k__BackingField: b4bec1a0-1827-4b00-9714-c8f67697e66c
+      <Text>k__BackingField: Next
+    <GroupID>k__BackingField: 83ed9a29-f897-4ea3-b380-140dcf0c9d9d
+    <DialogueType>k__BackingField: 1
+    <Position>k__BackingField: {x: 2307, y: -9}
+  - <ID>k__BackingField: fd461f0a-2637-43eb-89c4-6cc6f344d094
+    <Name>k__BackingField: Varollo
+    <Text>k__BackingField: 'I am afraid you are wrong! The original author of this
+      asset is Wafflus.  '
+    <Choices>k__BackingField:
+    - <ChoiceID>k__BackingField: 282979ed-7dfe-4a84-b468-c61b9d4877c4
+      <NodeID>k__BackingField: b4bec1a0-1827-4b00-9714-c8f67697e66c
+      <Text>k__BackingField: Next
+    <GroupID>k__BackingField: 83ed9a29-f897-4ea3-b380-140dcf0c9d9d
+    <DialogueType>k__BackingField: 1
+    <Position>k__BackingField: {x: 2396, y: 203}
+  - <ID>k__BackingField: b4bec1a0-1827-4b00-9714-c8f67697e66c
+    <Name>k__BackingField: Varollo
+    <Text>k__BackingField: Onto the next question!
+    <Choices>k__BackingField:
+    - <ChoiceID>k__BackingField: 3135c9fd-2f66-43bc-a572-023fc4041c89
+      <NodeID>k__BackingField: ea6b4c78-f0ae-4778-a0de-3c4d894f276b
+      <Text>k__BackingField: Next
+    <GroupID>k__BackingField: 83ed9a29-f897-4ea3-b380-140dcf0c9d9d
+    <DialogueType>k__BackingField: 1
+    <Position>k__BackingField: {x: 3038, y: 108}
+  - <ID>k__BackingField: ea6b4c78-f0ae-4778-a0de-3c4d894f276b
+    <Name>k__BackingField: Varollo
+    <Text>k__BackingField: "This project is open source, meaning it can be used or
+      contributed by anyone. \nThe question is: What licence is this project under?"
+    <Choices>k__BackingField:
+    - <ChoiceID>k__BackingField: f5d0305a-ed59-4a0b-b196-07e0d0c6cd76
+      <NodeID>k__BackingField: 728b63e4-babf-430e-bb13-24324d7862d0
+      <Text>k__BackingField: MIT
+    - <ChoiceID>k__BackingField: 11b4ccb3-0950-46aa-8510-f3bbe78b5a68
+      <NodeID>k__BackingField: be7a4d35-6f93-4e17-ac2d-1fa616222caa
+      <Text>k__BackingField: CC
+    - <ChoiceID>k__BackingField: 1303aba3-5b00-4b4f-9cd4-3c780cb202eb
+      <NodeID>k__BackingField: be7a4d35-6f93-4e17-ac2d-1fa616222caa
+      <Text>k__BackingField: Trust?
+    <GroupID>k__BackingField: 8da711c1-9e19-4865-a26e-d5f1fddb2828
+    <DialogueType>k__BackingField: 2
+    <Position>k__BackingField: {x: 3437, y: 100}
+  - <ID>k__BackingField: 728b63e4-babf-430e-bb13-24324d7862d0
+    <Name>k__BackingField: 
+    <Text>k__BackingField: '*DING!*'
+    <Choices>k__BackingField:
+    - <ChoiceID>k__BackingField: 1ae45edb-3625-4093-bbb4-b4fd65e029f0
+      <NodeID>k__BackingField: 9a3e7b88-f5f4-4886-9bda-75929fd849bb
+      <Text>k__BackingField: Next
+    <GroupID>k__BackingField: 8da711c1-9e19-4865-a26e-d5f1fddb2828
+    <DialogueType>k__BackingField: 1
+    <Position>k__BackingField: {x: 3970, y: -27}
+  - <ID>k__BackingField: be7a4d35-6f93-4e17-ac2d-1fa616222caa
+    <Name>k__BackingField: 
+    <Text>k__BackingField: '*BEEEEEEENG!*'
+    <Choices>k__BackingField:
+    - <ChoiceID>k__BackingField: d1436fa4-3948-4891-a959-0c48c29b9166
+      <NodeID>k__BackingField: 190f69e2-afa0-46b1-85a2-4a9f8c04c5b1
+      <Text>k__BackingField: Next
+    <GroupID>k__BackingField: 8da711c1-9e19-4865-a26e-d5f1fddb2828
+    <DialogueType>k__BackingField: 1
+    <Position>k__BackingField: {x: 3970, y: 240}
+  - <ID>k__BackingField: 9a3e7b88-f5f4-4886-9bda-75929fd849bb
+    <Name>k__BackingField: Varollo
+    <Text>k__BackingField: Correct! This project is under the MIT licence. That means
+      you can do whatever you please with this asset, be that of personal or commercial
+      business. Although not necessary, credit is appreciated!
+    <Choices>k__BackingField:
+    - <ChoiceID>k__BackingField: ff368fdf-32e7-4fa8-9d62-13dbf9ae4601
+      <NodeID>k__BackingField: e3383590-e29b-4d11-ba89-b86661f39490
+      <Text>k__BackingField: Next
+    <GroupID>k__BackingField: 8da711c1-9e19-4865-a26e-d5f1fddb2828
+    <DialogueType>k__BackingField: 1
+    <Position>k__BackingField: {x: 4249, y: -42}
+  - <ID>k__BackingField: 190f69e2-afa0-46b1-85a2-4a9f8c04c5b1
+    <Name>k__BackingField: Varollo
+    <Text>k__BackingField: Oops, not quite! This project is under the MIT licence.
+      That means you can do whatever you please with this asset, be that of personal
+      or commercial business. Although not necessary, credit is appreciated!
+    <Choices>k__BackingField:
+    - <ChoiceID>k__BackingField: f823da71-3335-42fc-a8df-b23d98727e56
+      <NodeID>k__BackingField: e3383590-e29b-4d11-ba89-b86661f39490
+      <Text>k__BackingField: Next
+    <GroupID>k__BackingField: 8da711c1-9e19-4865-a26e-d5f1fddb2828
+    <DialogueType>k__BackingField: 1
+    <Position>k__BackingField: {x: 4249, y: 216}
+  - <ID>k__BackingField: e3383590-e29b-4d11-ba89-b86661f39490
+    <Name>k__BackingField: Varollo
+    <Text>k__BackingField: That also means this will not have future support, but
+      I may update it in the future for personal use.
+    <Choices>k__BackingField:
+    - <ChoiceID>k__BackingField: 0907ac13-d527-4bc5-922c-5b975e217738
+      <NodeID>k__BackingField: 7f5017e2-2200-490d-bc6e-e7a4c8d48b20
+      <Text>k__BackingField: Next
+    <GroupID>k__BackingField: 8da711c1-9e19-4865-a26e-d5f1fddb2828
+    <DialogueType>k__BackingField: 1
+    <Position>k__BackingField: {x: 4945, y: 121}
+  - <ID>k__BackingField: 7f5017e2-2200-490d-bc6e-e7a4c8d48b20
+    <Name>k__BackingField: Varollo
+    <Text>k__BackingField: And that concludes the demo, again, feel free to do as
+      you please with this!
+    <Choices>k__BackingField:
+    - <ChoiceID>k__BackingField: 25ef7997-6193-4623-9b35-bddc10e56497
+      <NodeID>k__BackingField: 
+      <Text>k__BackingField: Next
+    <GroupID>k__BackingField: 
+    <DialogueType>k__BackingField: 1
+    <Position>k__BackingField: {x: 5659, y: 133}
+  - <ID>k__BackingField: bd0c74d9-5dd6-4475-9884-f04e65cb9614
+    <Name>k__BackingField: Varollo
+    <Text>k__BackingField: Tell me, dear contestant, who is the original author of
+      this asset?
+    <Choices>k__BackingField:
+    - <ChoiceID>k__BackingField: 88d3ea6c-05a9-4001-bda1-f472a25dc77b
+      <NodeID>k__BackingField: 418b3eea-b021-4f79-9ca6-94463d3e5647
+      <Text>k__BackingField: Varollo
+    - <ChoiceID>k__BackingField: b1cddb6a-db0c-4a6f-9cad-23e1e8895e94
+      <NodeID>k__BackingField: bdc7ac28-9c16-4240-a30b-ff15d1ac812e
+      <Text>k__BackingField: Wafflus
+    - <ChoiceID>k__BackingField: cc4d1faf-be59-488f-a15f-8965cd5ced4e
+      <NodeID>k__BackingField: 418b3eea-b021-4f79-9ca6-94463d3e5647
+      <Text>k__BackingField: Me!
+    <GroupID>k__BackingField: 83ed9a29-f897-4ea3-b380-140dcf0c9d9d
+    <DialogueType>k__BackingField: 2
+    <Position>k__BackingField: {x: 1533, y: 51}

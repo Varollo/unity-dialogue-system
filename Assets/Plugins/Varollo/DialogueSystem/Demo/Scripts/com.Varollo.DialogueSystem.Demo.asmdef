@@ -1,0 +1,16 @@
+{
+    "name": "com.Varollo.DialogueSystem.Demo",
+    "rootNamespace": "",
+    "references": [
+        "GUID:c7bec7a6f3b812d4296d49fe56d4b558"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
